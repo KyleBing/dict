@@ -2,7 +2,7 @@
 为了方便一些需要使用 txt 的用户，新建这样一个 txt 目录。
 
 该文件夹中的 `.txt` 内容是根据 `/book/` 文件夹中 `.json` 生成的。
-是由项目根目录中的 nodejs 脚本 `main.js` 生成的。
+是由项目根目录中的 nodejs 脚本 `json2text.js` 生成的。
 
 
 ## 一、文本生成规则
@@ -34,4 +34,4 @@ primary	 adj. 主要的，基本的
 
 1. 解压所有的 `/book/*.zip` 文件到原目录，变成  `/book/*.json`
 2. 根目录中新建 `/book-txt/` 文件夹
-3. 在根目录中执行 `node main.js` 即可自动生成对应的 txt 文件到 `/book/txt` 文件夹，再执行一遍会覆盖原有的 txt 文件
+3. 在根目录中执行 `node json2text.js` 即可自动生成对应的 txt 文件到 `/book/txt` 文件夹，再执行一遍会覆盖原有的 txt 文件
