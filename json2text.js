@@ -1,6 +1,6 @@
 /**
  * **该脚本功能**
- * - 读取 `/book/*.json` 的内容生成 `/book-txt/*.txt` 文件
+ * - 读取 `/book-json-full/*.json` 的内容生成 `/book-txt/*.txt` 文件
  * - 2022-03-28
  */
 
