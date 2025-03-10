@@ -1,7 +1,7 @@
 /**
  * **该脚本功能**
- * - 读取 `/book-json-full/*.json` 的内容生成 简版的 `json` 文件
- * - 2023-06-09
+ * - 读取 `/book-json-full/*.json` 的内容生成 词条 + 例名版的 `json` 文件
+ * - 2025-03-10
  */
 
 const fs = require('fs')
@@ -9,7 +9,7 @@ const path = require("path")
 
 
 const sourceFolderName = 'book-json-full' // 源目录名
-const destFolderName = 'book-json-simple' // 目标目录名
+const destFolderName = 'book-json-sentence' // 目标目录名
 
 
 // 读取配置目录中的所有码表文件
@@ -62,22 +62,32 @@ function writeFile(fileName){
 
     let newWordArray = []
 
-    let fileString = ''
     fileJsonObj.forEach(item => {
         let word = {
             word: item.content.word.wordHead,
+            us: item.content.word.content.usphone || '', // 音标 - 美式发音
+            uk: item.content.word.content.ukphone || '', // 音标 - 英式发音
             translations: item.content.word.content.trans.map(translation => {
                 return {
                     translation: translation.tranCn, // 注释
                     type: translation.pos // 词性
                 }
             }),
-            phrases: item.content.word.content.phrase && item.content.word.content.phrase.phrases.map(phrase => {
-                return {
-                    phrase: phrase.pContent, // 短语
-                    translation: phrase.pCn // 短语解释
-                }
-            })
+            phrases: item.content.word.content.phrase ?
+                        item.content.word.content.phrase.phrases.map(phrase => {
+                            return {
+                                phrase: phrase.pContent, // 短语
+                                translation: phrase.pCn // 短语解释
+                            }
+                        }): [],
+            sentences: item.content.word.content.sentence ?
+                                item.content.word.content.sentence.sentences.map(sentence => {
+                                    return {
+                                        sentence: sentence.sContent, // 例句英文
+                                        translation: sentence.sCn  // 例句翻译
+                                    }
+                                }) :
+                                []
         }
         newWordArray.push(word)
     })
